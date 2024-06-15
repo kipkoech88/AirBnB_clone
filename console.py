@@ -4,10 +4,12 @@ AirBnB console
 """
 import cmd
 import sys
+import os
 
 
 class AirBnB(cmd.Cmd):
     """ AirBnB console """
+    intro = ' Welcome to AirBnB console v1.0 '
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ' '
 
     def do_EOF(self, command):
@@ -23,9 +25,14 @@ class AirBnB(cmd.Cmd):
         exit()
 
     def help_quit(self):
-        """ exit with formating"""
+        """ to end the session with formating
+        use quit command
+        """
         print("Exit the program with formating")
 
 
 if __name__ == "__main__":
-    AirBnB().cmdloop()
+    if len(sys.argv) > 1:
+        AirBnB().onecmd(' '.join(sys.argv[1:]))
+    else:
+        AirBnB().cmdloop()
